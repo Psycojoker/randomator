@@ -71,6 +71,10 @@ STATICFILES_FINDERS += (
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
+from hamlpy.nodes import TagNode
+
+TagNode.self_closing["verbatim"] = "endverbatim"
+
 BOWER_INSTALLED_APPS = (
     'bootstrap',
 )
