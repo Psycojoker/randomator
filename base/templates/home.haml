@@ -23,8 +23,11 @@
       });
 
       $scope.editInspiration = function(inspiration, newName) {
-        inspiration.editing = false;
         inspiration.name = newName;
+        $http.post("inspiration/add/", inspiration).success(function(data) {
+          inspiration.editing = false;
+          inspiration.id = data;
+        });
       }
 
       $scope.addNewInspiration = function() {
