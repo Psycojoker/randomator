@@ -1,0 +1,48 @@
+-load static
+!!!
+%html{ng-app: ""}
+  %head
+    %title
+      Randomator
+    %meta{name: "viewport", content: "width: device-width, initial-scale: 1.0"}
+    %link{href: "{% static 'bootstrap/dist/css/bootstrap.min.css' %}", rel: "stylesheet"}
+
+    :css
+      body {
+        padding-top: 50px;
+      }
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+  %body
+    .navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{type: "button", data-toggle: "collapse", data-target: ".navbar-collapse"}
+            %span{class: "sr-only"}
+              Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href: "{% url 'home' %}"}
+            Randomator
+        .collapse.navbar-collapse
+          %ul{class: "nav navbar-nav"}
+            %li.active
+              %a{href: ""}
+                Home
+
+    .container
+      %h1 Randomator
+        %small
+          my personnal inspiration generator
+      %hr
+      -block content
+
+    %script{src: "{% static 'jquery/jquery.min.js' %}"}
+    %script{src: "{% static 'bootstrap/dist/js/bootstrap.min.js' %}"}
+    %script{src: "{% static 'angular/angular.js' %}"}

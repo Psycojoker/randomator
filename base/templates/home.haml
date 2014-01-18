@@ -1,0 +1,26 @@
+-extends "base.haml"
+
+-block content
+  -verbatim
+    %div{ng-controller: "InspirationController"}
+      .panel.panel-default
+        .panel-heading
+          %b Available inspirations
+          %button.btn.btn-sm.btn-primary{ng-click: "addNewInspiration()"}
+            add new inspiration
+        %ul.list-group{ng-repeat: "inspiration in inspirations"}
+          %li.list-group-item= inspiration.title
+
+
+  :javascript
+    function InspirationController($scope) {
+      $scope.inspirations = [
+        {title: "a"},
+        {title: "b"},
+        {title: "c"}
+      ];
+
+      $scope.addNewInspiration = function() {
+        $scope.inspirations.push({title: "pouet"});
+      };
+    }
