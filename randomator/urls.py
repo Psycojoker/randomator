@@ -6,5 +6,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name="home.haml"), name='home'),
+    url(r'^inspiration/', include('inspiration.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
