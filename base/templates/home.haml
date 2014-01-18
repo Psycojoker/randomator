@@ -9,18 +9,19 @@
           %button.btn.btn-sm.btn-primary{ng-click: "addNewInspiration()"}
             add new inspiration
         %ul.list-group{ng-repeat: "inspiration in inspirations"}
-          %li.list-group-item= inspiration.title
+          %li.list-group-item{ng-hide: "inspiration.editing"}= inspiration.title
+          %li.list-group-item{ng-show: "inspiration.editing"} caca
 
 
   :javascript
     function InspirationController($scope) {
       $scope.inspirations = [
-        {title: "a"},
-        {title: "b"},
-        {title: "c"}
+        {title: "a", editing: false},
+        {title: "b", editing: false},
+        {title: "c", editing: false}
       ];
 
       $scope.addNewInspiration = function() {
-        $scope.inspirations.push({title: "pouet"});
+        $scope.inspirations.push({title: "", editing: true});
       };
     }
