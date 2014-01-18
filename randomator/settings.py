@@ -69,11 +69,11 @@ STATICFILES_FINDERS += (
     'djangobower.finders.BowerFinder',
 )
 
-BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
-
 from hamlpy.nodes import TagNode
 
 TagNode.self_closing["verbatim"] = "endverbatim"
+
+BOWER_COMPONENTS_ROOT = BASE_DIR
 
 BOWER_INSTALLED_APPS = (
     'bootstrap',
