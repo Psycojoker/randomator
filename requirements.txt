@@ -1,0 +1,4 @@
+django
+django-angular
+django-bower
+hamlpy

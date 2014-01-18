@@ -59,6 +59,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_LOADERS = (
+    'hamlpy.template.loaders.HamlPyFilesystemLoader',
+    'hamlpy.template.loaders.HamlPyAppDirectoriesLoader',
+) + TEMPLATE_LOADERS
+
 STATICFILES_FINDERS += (
     'djangobower.finders.BowerFinder',
 )
