@@ -11,8 +11,8 @@
         %ul.list-group{ng-repeat: "inspiration in inspirations"}
           %li.list-group-item{ng-hide: "inspiration.editing"}= inspiration.name
           %li.list-group-item{ng-show: "inspiration.editing"}
-            %form{ng-submit: "editInspiration(inspiration, newTitle)"}
-              %input{type: "text", ng-model: "newTitle"}
+            %form{ng-submit: "editInspiration(inspiration, newName)"}
+              %input{type: "text", ng-model: "newName"}
 
 
   :javascript
@@ -22,9 +22,9 @@
         $scope.inspirations = data;
       });
 
-      $scope.editInspiration = function(inspiration, newTitle) {
+      $scope.editInspiration = function(inspiration, newName) {
         inspiration.editing = false;
-        inspiration.name = newTitle;
+        inspiration.name = newName;
       }
 
       $scope.addNewInspiration = function() {
