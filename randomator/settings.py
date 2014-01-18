@@ -50,6 +50,8 @@ INSTALLED_APPS = (
     'inspiration',
     'djangobower',
     'djangular',
+    'django_pdb',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (

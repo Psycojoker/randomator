@@ -2,3 +2,5 @@ django
 django-angular
 django-bower
 hamlpy
+django-pdb
+django-extensions
