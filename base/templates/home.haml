@@ -9,26 +9,25 @@
           %button.btn.btn-sm.btn-primary{ng-click: "addNewInspiration()"}
             add new inspiration
         %ul.list-group{ng-repeat: "inspiration in inspirations"}
-          %li.list-group-item{ng-hide: "inspiration.editing"}= inspiration.title
+          %li.list-group-item{ng-hide: "inspiration.editing"}= inspiration.name
           %li.list-group-item{ng-show: "inspiration.editing"}
             %form{ng-submit: "editInspiration(inspiration, newTitle)"}
               %input{type: "text", ng-model: "newTitle"}
 
 
   :javascript
-    function InspirationController($scope) {
-      $scope.inspirations = [
-        {title: "a", editing: false},
-        {title: "b", editing: false},
-        {title: "c", editing: false}
-      ];
+    function InspirationController($scope, $http) {
+      $scope.inspirations = [];
+      $http.get("inspiration/list/").success(function(data) {
+        $scope.inspirations = data;
+      });
 
       $scope.editInspiration = function(inspiration, newTitle) {
         inspiration.editing = false;
-        inspiration.title = newTitle;
+        inspiration.name = newTitle;
       }
 
       $scope.addNewInspiration = function() {
-        $scope.inspirations.push({title: "", editing: true});
+        $scope.inspirations.push({name: "", editing: true});
       };
     }
