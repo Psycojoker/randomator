@@ -22,8 +22,14 @@ def inspiration_list(request):
 @csrf_exempt
 def add_inspiration(request):
     data = json.loads(request.body)
-    result = Inspiration.objects.create(name=data["name"])
-    return HttpResponse(result.id)
+    if "id" in data and Inspiration.objects.filter(id=data["id"]).exists():
+        inspiration = Inspiration.objects.get(id=data["id"])
+        inspiration.name = data["name"]
+        inspiration.save()
+        return HttpResponse(inspiration.id)
+
+    return HttpResponse(Inspiration.objects.create(name=data["name"]).id)
+
 
 
 urlpatterns = patterns('',
