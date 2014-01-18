@@ -16,7 +16,7 @@ def datetime_serializer(value):
 
 
 def inspiration_list(request):
-    return HttpResponse(json.dumps(list(Inspiration.objects.all().values()), default=datetime_serializer))
+    return HttpResponse(json.dumps(list(Inspiration.objects.filter(active=True).values()), default=datetime_serializer))
 
 
 @csrf_exempt
