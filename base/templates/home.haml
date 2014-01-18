@@ -9,10 +9,10 @@
           %button.btn.btn-sm.btn-primary{ng-click: "addNewInspiration()"}
             add new inspiration
         %ul.list-group{ng-repeat: "inspiration in inspirations"}
-          %li.list-group-item{ng-hide: "inspiration.editing"}= inspiration.name
-          %li.list-group-item{ng-show: "inspiration.editing"}
-            %form{ng-submit: "editInspiration(inspiration, newName)"}
-              %input{type: "text", ng-model: "newName"}
+          %li.list-group-item{id: "{{ inspiration.id }}", ng-hide: "inspiration.editing", ng-click: "setEditingMode(inspiration)"}= inspiration.name
+          %li.list-group-item{id: "{{ inspiration.id }}", ng-show: "inspiration.editing"}
+            %form{ng-submit: "editInspiration(inspiration)"}
+              %input{id: "input-name-{{ inspiration.id }}", type: "text", ng-model: "inspiration.name", ng-blur: "inspiration.editing = false"}
 
 
   :javascript
@@ -23,14 +23,27 @@
       });
 
       $scope.editInspiration = function(inspiration, newName) {
-        inspiration.name = newName;
+        inspiration.editing = false;
         $http.post("inspiration/add/", inspiration).success(function(data) {
-          inspiration.editing = false;
           inspiration.id = data;
         });
       }
 
       $scope.addNewInspiration = function() {
-        $scope.inspirations.push({name: "", editing: true});
+        $scope.inspirations.push({name: "", editing: true, id: 0});
+        setTimeout(function() {
+          document.getElementById("input-name-0").focus();
+        }, 100);
       };
+
+      $scope.setEditingMode = function(inspiration) {
+        inspiration.editing = true;
+        setTimeout(function() {
+          element = document.getElementById("input-name-" + inspiration.id);
+          element.focus();
+          var save_value = element.value;
+          element.value = "";
+          element.value = save_value;
+        }, 50);
+      }
     }
