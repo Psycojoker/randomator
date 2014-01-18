@@ -77,6 +77,7 @@ BOWER_COMPONENTS_ROOT = BASE_DIR
 
 BOWER_INSTALLED_APPS = (
     'bootstrap',
+    'angular',
 )
 
 ROOT_URLCONF = 'randomator.urls'
