@@ -1,4 +1,5 @@
 -extends "base.haml"
+-load coffeescript
 
 -block content
   -verbatim
@@ -15,35 +16,34 @@
               %input{id: "input-name-{{ inspiration.id }}", type: "text", ng-model: "inspiration.name", ng-blur: "inspiration.editing = false"}
 
 
-  :javascript
-    function InspirationController($scope, $http) {
-      $scope.inspirations = [];
-      $http.get("inspiration/list/").success(function(data) {
-        $scope.inspirations = data;
-      });
+  %script
+    -inlinecoffeescript
+      window.InspirationController = ($scope, $http) ->
+        $scope.inspirations = []
+        $http.get("inspiration/list/").success (data) ->
+          $scope.inspirations = data
 
-      $scope.editInspiration = function(inspiration, newName) {
-        inspiration.editing = false;
-        $http.post("inspiration/add/", inspiration).success(function(data) {
-          inspiration.id = data;
-        });
-      }
+        $scope.editInspiration = (inspiration, newName) ->
+          inspiration.editing = false
+          $http.post("inspiration/add/", inspiration).success (data) ->
+            inspiration.id = data
 
-      $scope.addNewInspiration = function() {
-        $scope.inspirations.push({name: "", editing: true, id: 0});
-        setTimeout(function() {
-          document.getElementById("input-name-0").focus();
-        }, 100);
-      };
+        $scope.addNewInspiration = ->
+          $scope.inspirations.push
+            name: ""
+            editing: true
+            id: 0
 
-      $scope.setEditingMode = function(inspiration) {
-        inspiration.editing = true;
-        setTimeout(function() {
-          element = document.getElementById("input-name-" + inspiration.id);
-          element.focus();
-          var save_value = element.value;
-          element.value = "";
-          element.value = save_value;
-        }, 50);
-      }
-    }
+          setFocus = -> document.getElementById("input-name-0").focus()
+
+          setTimeout(setFocus, 100)
+
+        $scope.setEditingMode = (inspiration) ->
+          inspiration.editing = true
+          setFocus = ->
+            element = document.getElementById("input-name-" + inspiration.id)
+            element.focus()
+            save_value = element.value
+            element.value = ""
+            element.value = save_value
+          setTimeout(setFocus, 50)

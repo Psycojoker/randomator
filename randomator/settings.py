@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'djangular',
     'django_pdb',
     'django_extensions',
+    'static_precompiler',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -70,11 +71,13 @@ TEMPLATE_LOADERS = (
 
 STATICFILES_FINDERS += (
     'djangobower.finders.BowerFinder',
+    'static_precompiler.finders.StaticPrecompilerFinder',
 )
 
 from hamlpy.nodes import TagNode
 
 TagNode.self_closing["verbatim"] = "endverbatim"
+TagNode.self_closing["inlinecoffeescript"] = "endinlinecoffeescript"
 
 BOWER_COMPONENTS_ROOT = BASE_DIR
 
