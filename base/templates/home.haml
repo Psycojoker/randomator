@@ -10,12 +10,22 @@
           %button.btn.btn-sm.btn-primary{ng-click: "addNewInspiration()"}
             add new inspiration
         %ul.list-group{ng-repeat: "inspiration in inspirations"}
-          %li.list-group-item{id: "{{ inspiration.id }}", ng-hide: "inspiration.editing", ng-click: "setEditingMode(inspiration)"}= inspiration.name
+          %li.list-group-item{id: "{{ inspiration.id }}", ng-hide: "inspiration.editing", ng-mouseover: "inspiration.showOptions = true", ng-mouseleave: "inspiration.showOptions = false"}= inspiration.name
+            %span.options{ng-show: "inspiration.showOptions"}
+              %button.btn.btn-xs{ng-click: "setEditingMode(inspiration)"} edit
           %li.list-group-item{id: "{{ inspiration.id }}", ng-show: "inspiration.editing"}
             %form{ng-submit: "editInspiration(inspiration)"}
               %input{id: "input-name-{{ inspiration.id }}", type: "text", ng-model: "inspiration.name", ng-blur: "inspiration.editing = false"}
 
 
+  :css
+    span.options button {
+      padding-top: 0;
+      padding-bottom: 0;
+      border-top-width: 0;
+      border-bottom-width: 0;
+      margin-left: 10px;
+    }
   %script
     -inlinecoffeescript
       window.InspirationController = ($scope, $http) ->
