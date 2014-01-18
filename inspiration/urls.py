@@ -12,6 +12,7 @@ def datetime_serializer(value):
         return value.strftime("%F %X")
     return value
 
+
 def inspiration_list(request):
     return HttpResponse(json.dumps(list(Inspiration.objects.all().values()), default=datetime_serializer))
 
