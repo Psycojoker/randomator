@@ -7,7 +7,7 @@
       .panel.panel-default
         .panel-heading
           %b Available inspirations
-          %button.btn.btn-sm.btn-primary{ng-click: "addNewInspiration()"}
+          %button.btn.btn-xs.btn-primary{ng-click: "addNewInspiration()"}
             add new inspiration
         %ul.list-group{ng-repeat: "inspiration in inspirations"}
           %li.list-group-item{id: "{{ inspiration.id }}", ng-hide: "inspiration.editing", ng-mouseover: "inspiration.showOptions = true", ng-mouseleave: "inspiration.showOptions = false"}= inspiration.name
