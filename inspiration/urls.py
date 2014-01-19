@@ -4,6 +4,7 @@ from datetime import datetime
 
 from django.http import HttpResponse
 from django.conf.urls import patterns, url
+from django.views.generic import DetailView
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Inspiration
@@ -35,4 +36,5 @@ def add_inspiration(request):
 urlpatterns = patterns('',
     url(r'^list/$', inspiration_list, name='inspiration_list'),
     url(r'^add/$', add_inspiration, name='add_inspiration'),
+    url(r'^get/(?P<pk>\d+)/$', DetailView.as_view(model=Inspiration), name='add_inspiration'),
 )
