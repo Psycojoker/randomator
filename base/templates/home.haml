@@ -15,7 +15,7 @@
               %button.btn.btn-xs{ng-click: "setEditingMode(inspiration)"} edit
           %li.list-group-item{id: "{{ inspiration.id }}", ng-show: "inspiration.editing"}
             %form{ng-submit: "editInspiration(inspiration)"}
-              %input{id: "input-name-{{ inspiration.id }}", type: "text", ng-model: "inspiration.name", ng-blur: "inspiration.editing = false"}
+              %input{id: "input-name-{{ inspiration.id }}", type: "text", ng-model: "inspiration.name", ng-blur: "stopEditing(inspiration)"}
 
 
   :css
@@ -26,6 +26,8 @@
       border-bottom-width: 0;
       margin-left: 10px;
     }
+
+-block javascript
   %script
     -inlinecoffeescript
       window.InspirationController = ($scope, $http) ->
@@ -35,8 +37,14 @@
 
         $scope.editInspiration = (inspiration, newName) ->
           inspiration.editing = false
-          $http.post("inspiration/add/", inspiration).success (data) ->
-            inspiration.id = data
+          if inspiration.name.length != 0
+            $http.post("inspiration/add/", inspiration).success (data) ->
+              inspiration.id = data
+
+        $scope.stopEditing = (inspiration) ->
+          inspiration.editing = false
+          if inspiration.name.length == 0 && inspiration.id == 0
+            remove($scope.inspirations, inspiration)
 
         $scope.addNewInspiration = ->
           $scope.inspirations.push
